@@ -1,0 +1,29 @@
+<%= render "shared/nav" %>
+<%= render "shared/banner" %>
+
+<div class="container mt-5 text-center">
+  <h1 class="mb-5">Créer une liste</h1>
+
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card shadow-sm rounded-5 p-4 bg-secondary text-white">
+
+        <%= simple_form_for @list do |f| %>
+          <%= f.input :name,
+            label: "Nom de la liste",
+            input_html: { class: "rounded-5" } %>
+
+          <%= f.submit "Créer la liste",
+            class: "btn btn-success rounded-5 mt-3" %>
+        <% end %>
+
+      </div>
+
+      <div class="mt-4">
+        <%= link_to "Retour aux listes",
+          lists_path,
+          class: "btn btn-outline-secondary rounded-5" %>
+      </div>
+    </div>
+  </div>
+</div>

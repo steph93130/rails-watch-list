@@ -1,0 +1,35 @@
+<!-- app/views/bookmarks/new.html.erb -->
+
+<%= render "shared/nav" %>
+<%= render "shared/banner" %>
+
+<div class="container mt-5 text-center">
+  <h1 class="mb-5">Ajouter un film à <%= @list.name %></h1>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm bg-secondary rounded-5 p-4 text-white">
+
+        <%= simple_form_for [@list, @bookmark] do |f| %>
+
+          <%= f.association :movie,
+            label: "Choisir un film" %>
+
+          <%= f.input :comment,
+            label: "Commentaire" %>
+
+          <%= f.submit "Ajouter le film",
+            class: "btn btn-success rounded-5 mt-3" %>
+
+        <% end %>
+
+      </div>
+
+      <div class="mt-4">
+        <%= link_to "Retour à la liste",
+          list_path(@list),
+          class: "btn btn-outline-secondary rounded-5" %>
+      </div>
+    </div>
+  </div>
+</div>

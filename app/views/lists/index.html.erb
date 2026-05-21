@@ -1,0 +1,50 @@
+<%= render "shared/nav" %>
+<%= render "shared/banner" %>
+
+<div class="container mt-5 text-center">
+  <h1 class="mb-4">Mes listes de films</h1>
+
+  <div class="row">
+    <% @lists.each do |list| %>
+      <% first_movie = list.movies.first %>
+
+      <div class="col-6 col-md-3 mb-4">
+        <%= link_to list_path(list), class: "text-decoration-none text-light" do %>
+          <div class="card h-100 shadow-sm rounded-5 bg-black text-light">
+            <% if first_movie&.poster_url.present? %>
+              <%= image_tag first_movie.poster_url,
+                class: "card-img-top rounded-5",
+                alt: first_movie.title,
+                style: "height: 220px; object-fit: cover;" %>
+            <% else %>
+              <div class="bg-secondary d-flex align-items-center justify-content-center"
+                   style="height: 220px;">
+                Aucun film
+              </div>
+            <% end %>
+
+            <div class="card-body p-2">
+              <h6 class="card-title mb-1"><%= list.name %></h6>
+
+              <% if first_movie %>
+                <p class="card-text small text-light mb-0 ">
+                  <%= first_movie.title %>
+                </p>
+              <% else %>
+                <p class="card-text small text-light mb-0">
+                  Cette liste est vide
+                </p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-4 text-center">
+    <%= link_to "Créer une nouvelle liste",
+      new_list_path,
+      class: "btn btn-success rounded-5" %>
+  </div>
+</div>

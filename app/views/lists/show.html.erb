@@ -1,0 +1,63 @@
+<%= render "shared/nav" %>
+<%= render "shared/banner" %>
+
+<div class="container mt-5 text-center">
+  <h1 class="mb-4"><%= @list.name %></h1>
+
+  <%= link_to "Retour aux listes",
+    lists_path,
+    class: "btn btn-outline-secondary rounded-5 mb-4" %>
+
+  <h2 class="mb-4">Films dans cette liste</h2>
+
+  <% if @list.bookmarks.any? %>
+    <div class="row">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-6 col-md-3 mb-4">
+          <div class="card h-100 shadow-sm rounded-5 bg-secondary text-white">
+            <% if bookmark.movie.poster_url.present? %>
+              <%= image_tag bookmark.movie.poster_url,
+                class: "card-img-top rounded-top-5",
+                alt: bookmark.movie.title,
+                style: "height: 220px; object-fit: cover;" %>
+            <% end %>
+
+            <div class="card-body p-2 bg-black rounded-bottom-5">
+              <h6 class="card-title mb-2"><%= bookmark.movie.title %></h6>
+
+              <p class="card-text small mb-1">
+                Note : <%= bookmark.movie.rating %>
+              </p>
+
+              <p class="card-text small mb-2">
+                <%= truncate(bookmark.movie.overview, length: 90) %>
+              </p>
+
+              <p class="card-text small mb-2">
+                <strong>Commentaire :</strong><br>
+                <%= bookmark.comment %>
+              </p>
+
+              <%= link_to "X",
+                bookmark_path(bookmark),
+                class: "btn btn-danger btn-sm rounded-circle",
+                data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Es-tu sûr ?"
+                } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-muted">Aucun film dans cette liste pour le moment.</p>
+  <% end %>
+
+  <div class="mt-5 text-center">
+  <%= link_to "Ajouter un film",
+    new_list_bookmark_path(@list),
+    class: "btn btn-success rounded-5" %>
+</div>
+
+</div>
