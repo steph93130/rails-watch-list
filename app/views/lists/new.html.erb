@@ -13,6 +13,9 @@
             label: "Nom de la liste",
             input_html: { class: "rounded-5" } %>
 
+              <%= f.input :photo,as: :file,
+              label: "Image de la liste" %>
+
           <%= f.submit "Créer la liste",
             class: "btn btn-success rounded-5 mt-3" %>
         <% end %>
