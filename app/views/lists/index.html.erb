@@ -10,7 +10,7 @@
 
       <div class="col-6 col-md-3 mb-4">
         <%= link_to list_path(list), class: "text-decoration-none text-light" do %>
-          <div class="card h-100 shadow-sm rounded-5 bg-black text-light">
+          <div class="card h-100 shadow-sm rounded-5 bg-black text-light border border-light shadow-lg">
 
             <% if list.photo.attached? %>
               <%= cl_image_tag list.photo.key,
@@ -24,7 +24,7 @@
               </div>
             <% end %>
 
-            <div class="card-body p-2">
+            <div class="card-body  p-2">
               <h6 class="card-title mb-1"><%= list.name %></h6>
 
               <% if first_movie %>
